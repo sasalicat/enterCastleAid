@@ -8,14 +8,34 @@ public class showFrame : MonoBehaviour {
     public Color normalColor;
     public Image frame;
     public Text numTxt;
-    private int number; 
-    public void changeNum(int offset) {
-        number += offset;
-        if (number < 0)
+    public int initNum;
+    protected int number;
+    public int Number
+    {
+        set
         {
-            number = 0;
+            number = value;
+            numTxt.text = "" + number;
         }
-        numTxt.text = "" + number;
+        get
+        {
+            return number;
+        }
+    }
+    public void Start()
+    {
+        Number = initNum;
+    }
+    public void setNum(int num)
+    {
+        Number = num;
+    } 
+    public void changeNum(int offset) {
+        Number += offset;
+        if (Number < 0)
+        {
+            Number = 0;
+        }
     }
     public void onClick() {
         rolePanel.activeFrame = this;

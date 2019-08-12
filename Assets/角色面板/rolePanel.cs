@@ -3,16 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class rolePanel : MonoBehaviour {
-    protected static showFrame nowActive;
+    protected static showFrame nowActive=null;
     public static showFrame activeFrame {
         set
         {
-            nowActive.unActive();
+            if(nowActive!=null)
+                nowActive.unActive();
             nowActive = value;
         }
     }
-    public void numChange(int offset)
+    public  void plusActiveNum(int offset){
+        if(nowActive!=null)
+            nowActive.changeNum(offset);
+    }
+    public  void setActiveNum(int num)
     {
-        nowActive.changeNum(offset);
+        if (nowActive != null)
+            nowActive.setNum(num);
     }
 }
