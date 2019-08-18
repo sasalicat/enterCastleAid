@@ -116,4 +116,41 @@ public class chessBoard : MonoBehaviour {
             
         }
     }
+    public void addInRow(int y,int hp,int cd)
+    {
+        for (int x = 0; x < X; x++) {
+            if (!monster(x,y).live)
+            {
+                iconList[X * y + x].init(hp, cd);
+                break;
+            }
+        }
+    }
+    public void refresh()
+    {
+        Debug.Log("refresh start!");
+        for (int y = 0; y < Y; y++)
+        {
+            //Debug.Log("y=" + y);
+            for(int x=0;x<X;x++)
+            {
+                if (!monster(x, y).live) {
+                    //Debug.Log("x=" + x + "monster not live");
+                    for (int i = x+1; i < X; i++)
+                    {
+                        if (monster(i, y).live)
+                        {
+                            int hp_num = monster(i, y).HP;
+                            int cd_num = monster(i, y).CD;
+                            int t_num = monster(i, y).Traget;
+                            monster(x,y).init(hp_num, cd_num);
+                            monster(x, y).Traget = monster(i, y).Traget;
+                            monster(i, y).quit();
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
